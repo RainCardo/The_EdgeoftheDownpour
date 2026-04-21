@@ -1,11 +1,14 @@
 function openDetail() {
     const overlay = document.getElementById('detail-overlay');
     overlay.classList.remove('hidden');
+    // 모바일에서 스크롤 꼬임 방지
+    document.body.style.overflow = 'hidden';
     switchTab(null, '표지');
 }
 
 function closeDetail() {
     document.getElementById('detail-overlay').classList.add('hidden');
+    document.body.style.overflow = 'auto';
 }
 
 function switchTab(el, name) {
@@ -52,16 +55,15 @@ function switchTab(el, name) {
                 <img src="https://i.imgur.com/Za0T3xy.png" class="item-card" id="card3">
             </div>
         `;
+        // 모바일 환경에선 즉시 보이도록, PC에선 애니메이션
         setTimeout(() => {
             ['card1', 'card2', 'card3'].forEach(id => {
                 const card = document.getElementById(id);
                 if(card) card.classList.add('show');
             });
-        }, 50);
+        }, 100);
     }
 
-    if (window.innerWidth <= 1024) {
-        window.scrollTo(0, 0);
-        wrapper.scrollTo(0, 0);
-    }
+    // 탭 이동 시 스크롤 위치 초기화
+    wrapper.scrollTo(0, 0);
 }
